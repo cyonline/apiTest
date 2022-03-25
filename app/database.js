@@ -14,10 +14,13 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-connection.query('select * from user',(res)=>{
-    console.log(res);
+connection.query('select * from user',(err,res)=>{
+    console.log('查询结果',res);
 })
-
+connection.query('insert into user value("cy","123456","0")',function(a,b){
+    console.log(a)
+    console.log(b)
+})
 connection.end();
 
 module.exports = connection;
