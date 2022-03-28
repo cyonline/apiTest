@@ -1,20 +1,14 @@
-const connection = require('../app/database');
-
-const query = async function(){
-    let sql = `select * from user`;
-    let result = connection.query(sql,(err,row)=>{
-        if(err){
-            throw err;
-        }
-        console.log(res);
-        return res;
-    })
-    console.log('result:',result);
+const userModel = require('../model/user')
+const query = async function(ctx){
+    let result = await userModel.findAll('xxx');
+    console.info(typeof result)
+    console.info(result);
+    return result
 }
-const create = async function(){
-    let sql = `insert into user (value text) `;
-    let result = connection.query(sql);
-}
+// const create = async function(){
+//     let sql = `insert into user (value text) `;
+//     let result = connection.query(sql);
+// }
 
 module.exports = {
     query,
