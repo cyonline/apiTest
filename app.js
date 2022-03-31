@@ -10,6 +10,8 @@ app.use(async (ctx, next) => {
     await next(); // 调用下一个middleware
 }); 
 
+const {accessLogger,logger} = require('./middleware/log')
+app.use(accessLogger);
 
 // app.use(async (ctx, next) => {
 //     await next();
@@ -17,7 +19,7 @@ app.use(async (ctx, next) => {
 //     ctx.response.body = '<h1>Hello, koa2!</h1>';
 // });
 
-const userRouter = require('./router/user.router');
+// const userRouter = require('./router/user.router');
 const router = require('./router')
 
 app.use(router.routes())
