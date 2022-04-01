@@ -1,0 +1,2 @@
+[2022-04-01T09:10:23.208] [INFO] access - ::1 - - "GET /user/list HTTP/1.1" 200 77 "" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"
+[2022-04-01T09:10:23.399] [INFO] access - ::1 - - "GET /user/list HTTP/1.1" 200 77 "" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"

@@ -6,15 +6,23 @@ const {logger} = require('../middleware/log')
 
 const getUser = async function (ctx, next) {
     try {
-        let res = await userSevice.query();
-        console.info('user', res)
+        let data = await userSevice.query();
+        console.info('user', data)
         ctx.response.status = 200;
-        ctx.body = res;
+        ctx.body = {
+            code: '200',
+            msg: 'success',
+            data
+        };
     } catch (err) {
         ctx.response.status = 400;
         logger.error(err);
         // console.info(err);
-        ctx.body = err;
+        ctx.body = {
+            code: '400',
+            msg: 'error',
+            data: null,
+        };
     }
 
 }

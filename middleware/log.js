@@ -8,12 +8,12 @@ log4js.configure({
             type: 'console'
         },
         access:{
-            type: 'file',
+            type: 'dateFile', // 日志名带日期
             maxLogSize: 5*1000*1000,
             backups: 50,
             // compress: true, // 压缩成 .gz 
             filename: 'logs/access.log',
-            pattern: '-yyyy-MM-dd-hh-mm',
+            pattern: '-yyyy-MM-dd',
             keepFileExt: true, // 保留文件拓展名
         },
         error: {
@@ -39,9 +39,8 @@ const logger = log4js.getLogger('error')
 // Open logger
 // logger.level = 'all';
 // logger.debug("Logger已经开启！");
-module.exports.accessLogger = accessLogger;
-module.exports.logger = logger;
-// module.exports = {
-//     accessLogger,
-//     logger
-// };
+
+module.exports = {
+    accessLogger,
+    logger
+};
