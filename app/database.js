@@ -21,11 +21,22 @@ const sequelize = new Sequelize('cykoa', 'root', '123456', {
         idle: 10000
     },
 });
+// 测试链接是否成功
 sequelize.authenticate().then(() => {
     console.log('Databese connection has been established successfully.');
 }).catch(err => {
     console.error('Unable to connect to the database:', err);
 });
+// 根据 model自动创建表
+sequelize
+    .sync()
+    .then(() => {
+        console.log('init db ok')
+    })
+    .catch(err => {
+        console.log('init db error', err)
+    })
+
 // connection.connect();
 
 // connection.query('select * from user',(err,res)=>{
