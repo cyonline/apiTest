@@ -36,5 +36,5 @@ sequelize.authenticate().then(() => {
 //     console.log(b)
 // })
 // connection.end();
-
+// a
 module.exports = sequelize;
