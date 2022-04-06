@@ -7,12 +7,12 @@ app.use(bodyParser());
 
 app.use(async (ctx, next) => {
     console.log(`${ctx.request.method} ${ctx.request.url}`); // 打印URL
-    await next(); // 调用下一个middleware
-}); 
+    await next(); // 调用下一个middleware,链式调用
+});
 
-const {accessLogger,logger} = require('./middleware/log')
+const { accessLogger, logger } = require('./middleware/log')
 app.use(accessLogger);
-
+app.on('error', err => { logger.error(err) })
 // app.use(async (ctx, next) => {
 //     await next();
 //     ctx.response.type = 'text/html';
@@ -23,9 +23,9 @@ app.use(accessLogger);
 const router = require('./router')
 
 app.use(router.routes())
-// 自动丰富response相应头，当未设置响应状态的时候自动设置，在所有路由中间件最后设置，也可以设置具体某一个路由，例如：router.get('/index', router.allowedMethods());这相当于当访问/index时才设置
-.use(router.allowedMethods())
+    // 自动丰富response相应头，当未设置响应状态的时候自动设置，在所有路由中间件最后设置，也可以设置具体某一个路由，例如：router.get('/index', router.allowedMethods());这相当于当访问/index时才设置
+    .use(router.allowedMethods())
 
-app.listen('8001',(res)=>{
+app.listen('8001', (res) => {
     console.info('running')
 })

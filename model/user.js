@@ -1,4 +1,5 @@
 const sequelize = require('../app/database');
+const moment = require('moment')
 // 用sequelize.define()定义Model时，传入名称user，默认的表名就是users
 const user = sequelize.define('user', {
 
@@ -18,7 +19,22 @@ const user = sequelize.define('user', {
         type: sequelize.Sequelize.TEXT,
         comment: '用户密码'
     },
-
+    // //创建时间
+    // createdAt: {
+    //     type: sequelize.Sequelize.DATE,
+    //     defaultValue: new Date(),
+    //     get(){
+    //         return moment(this.getDataValue('createdAt')).format('YYYY-MM-DD HH:mm:ss')
+    //     }
+    // },
+    // //更新时间
+    // createdAt: {
+    //     type: sequelize.Sequelize.DATE,
+    //     defaultValue: new Date(),
+    //     get(){
+    //         return new Date()
+    //     }
+    // }
 }, {
     timestamps: false // 为了关闭Sequelize的自动添加timestamp
 });
