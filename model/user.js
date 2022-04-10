@@ -1,4 +1,4 @@
-const sequelize = require('../app/database');
+const sequelize = require('../config/database');
 // 用sequelize.define()定义Model时，传入名称user，默认的表名就是users
 const user = sequelize.define('user', {
 

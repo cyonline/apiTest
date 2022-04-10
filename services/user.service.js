@@ -6,7 +6,7 @@ const query = async function(ctx){
     try{
         let result = await userModel.findAll();
         // console.info(typeof result)
-        console.info(result);
+        // console.info(result);
         return result
     }catch(err){
         console.info(err);
