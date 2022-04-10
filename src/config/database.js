@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-// const config = require('./config');
+const config = require('./api-config');
 
 // 建立连接池,与数据库进行连接
 // const connection = mysql.createConnection({
@@ -11,7 +11,7 @@ const Sequelize = require('sequelize')
 //     password: '123456'
 // });
 const sequelize = new Sequelize('cykoa', 'root', '123456', {
-    host: 'localhost',
+    host: config.dev.host,
     port: '3306',
     dialect: 'mysql',
     pool: {
