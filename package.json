@@ -15,6 +15,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "hotnode src/app.js",
+    "debug": "hotnode --inspect-brk=9230 src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "cyonline",

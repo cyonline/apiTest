@@ -2,13 +2,11 @@
     service文件,负责与数据库交互
 */
 const userModel = require('../model/user')
-// const { logger } = require('../middleware/log')
-
-const query = async function(user){
-    try{
-        console.info('user:',user);
+const query = async function (user) {
+    try {
+        console.info('user:', user);
         let filters = {}
-        if(user){
+        if (user) {
             filters = {
                 where: user
             }
@@ -17,14 +15,33 @@ const query = async function(user){
         // console.info(typeof result)
         // console.info(result);
         return result
-    }catch(err){
-        // logger.error(err);
+    } catch (err) {
         throw err;
     }
-    
+
 }
 
-const createUser = async function(user){
+const userLogin = async function (user) {
+    try {
+        console.info('user:', user);
+        let filters = {}
+
+        filters = {
+            where: {
+                name: user.name
+            }
+        }
+
+        let result = await userModel.findOne(filters);  
+        console.info('serviceuserLogin:', result);  // {} [] null
+        return result 
+    } catch (error) {
+        throw error;
+    }
+
+}
+
+const createUser = async function (user) {
     try {
         console.info(user);
         let res = await userModel.create({
@@ -34,12 +51,12 @@ const createUser = async function(user){
         })
         return res;
     } catch (error) {
-        // logger.error(error);
         throw error;
     }
 }
 
 module.exports = {
     query,
+    userLogin,
     createUser
 }
