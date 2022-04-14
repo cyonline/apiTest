@@ -8,12 +8,12 @@ const query = async function (user) {
         let filters = {}
         if (user) {
             filters = {
-                where: user
+                where: user,
+                // raw:true  // 以json格式返回结果
             }
         }
         let result = await userModel.findAll(filters);
-        // console.info(typeof result)
-        // console.info(result);
+        console.info('query:',result);
         return result
     } catch (err) {
         throw err;
@@ -23,15 +23,13 @@ const query = async function (user) {
 
 const userLogin = async function (user) {
     try {
-        console.info('user:', user);
-        let filters = {}
-
-        filters = {
+        // console.info('user:', user);
+        let filters = {
             where: {
                 name: user.name
-            }
+            },
+            
         }
-
         let result = await userModel.findOne(filters);  
         console.info('serviceuserLogin:', result);  // {} [] null
         return result 

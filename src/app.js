@@ -1,6 +1,10 @@
 const Koa = require('koa');
-const cors = require('koa2-cors')
+// 跨域资源共享
+const cors = require('koa2-cors');
+// 解析post请求参数
 const bodyParser = require('koa-bodyparser');
+const {accessLogger,logger} = require('./middleware/log')
+
 
 const app = new Koa();
 // const Router = require('koa-router');
@@ -10,19 +14,30 @@ const app = new Koa();
 app.use(bodyParser());
 
 app.use(async (ctx, next) => {
-    console.log(`${ctx.request.method} ${ctx.request.url}`); // 打印URL
-    await next(); // 调用下一个middleware
+    try {
+        sdaf
+        console.log(`${ctx.request.method} ${ctx.request.url}`); // 打印URL
+        await next(); // 调用下一个middleware
+    } catch (error) {
+        console.info(error);
+        logger.error(error);
+        throw error;
+    }
+    
 }); 
 // 允许跨域访问
 const CORS_CONF = require('./config/cors-config')
-app.use(cors(CORS_CONF))
+app.use(cors(CORS_CONF));
+
+
 
 // 全局使用日志中间件
-const {accessLogger,logger} = require('./middleware/log')
 app.use(accessLogger);
 app.on('error',(err)=>{
     logger.error(err);
 })
+
+
 // app.use(async (ctx, next) => {
 //     await next();
 //     ctx.response.type = 'text/html';
