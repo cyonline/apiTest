@@ -13,18 +13,17 @@ const app = new Koa();
 // 注意顺序,必须在router之前被注册到app上
 app.use(bodyParser());
 
-app.use(async (ctx, next) => {
-    try {
-        sdaf
-        console.log(`${ctx.request.method} ${ctx.request.url}`); // 打印URL
-        await next(); // 调用下一个middleware
-    } catch (error) {
-        console.info(error);
-        logger.error(error);
-        throw error;
-    }
+// app.use(async (ctx, next) => {
+//     try {
+//         console.log(`${ctx.request.method} ${ctx.request.url}`); // 打印URL
+//         await next(); // 调用下一个middleware
+//     } catch (error) {
+//         // console.info(error);
+//         // logger.error(error);
+//         throw error;
+//     }
     
-}); 
+// }); 
 // 允许跨域访问
 const CORS_CONF = require('./config/cors-config')
 app.use(cors(CORS_CONF));
@@ -33,8 +32,13 @@ app.use(cors(CORS_CONF));
 
 // 全局使用日志中间件
 app.use(accessLogger);
-app.on('error',(err)=>{
+app.on('error',(err,ctx)=>{
     logger.error(err);
+    // console.info('捕捉:',err)
+    ctx.body = {
+        state: 500,
+        msg: err,
+    }
 })
 
 

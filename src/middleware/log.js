@@ -12,13 +12,13 @@ log4js.configure({
             maxLogSize: 5*1000*1000,
             backups: 50,
             // compress: true, // 压缩成 .gz 
-            filename: '../logs/access.log',
+            filename: 'logs/access.log',
             pattern: '-yyyy-MM-dd',
             keepFileExt: true, // 保留文件拓展名
         },
         error: {
             type: 'file',
-            filename: '../logs/error.log'
+            filename: 'logs/error.log'  // 注意这里不要改成相对目录,否则不会生成日志,不知道为什么
         }
     },
     categories: {

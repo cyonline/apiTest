@@ -3,7 +3,7 @@ module.exports = {
         try {
             // console.info(ctx.url+'---')
             let corsResult = '';
-            if(ctx.header['sec-fetch-mode'] === 'navigate'){ // 设置允许来自指定域名的请求
+            if(ctx.header['sec-fetch-mode'] === 'navigate'){ // 设置允许来自指定域名的请求(这里允许直接在浏览器地址栏请求)
                 return '*';  // 允许来自所有域名请求
             }
             const whiteList = ['http://cyonline.club','http://localhost:3000','http://localhost:8001'];
