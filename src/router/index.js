@@ -4,15 +4,15 @@ const router = new Router();
 const jwt = require('koa-jwt');
 const userRouter = require('./user.router');
 const loginRouter = require('./login.router');
-
+const config = require('../config/config')
 const secret = 'privatekeytest' // 定义一个密钥,测试用;应放在配置文件里
 router.use(
     jwt({
-        secret,
+        secret:config.JWT_SECRET,
         cookie: 'token',
         debug: true
     }).unless({
-        path: [/\/auth/]
+        path: [/\/authorize/]
     })
 )
 
