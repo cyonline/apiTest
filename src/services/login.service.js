@@ -17,6 +17,33 @@ const authorize = async function (user) {
     }
 
 }
+
+const register = async function (user) {
+    try {
+        // console.info('register:', user);
+        // 先查询是否有重复
+        let filters = {
+            where:{
+                name: user.name
+            },
+            raw: true,
+        }
+        let isUserExist = await userModel.findOne(filters)
+        // console.info('isUserExist',isUserExist)
+        if(isUserExist){
+            return null
+        }
+        let res = await userModel.create({
+            name: user.name,
+            password: user.password,
+            email: user.email
+        })
+        return res;
+    } catch (error) {
+        throw error;
+    }
+}
 module.exports = {
-    authorize
+    authorize,
+    register
 }

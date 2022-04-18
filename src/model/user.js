@@ -14,7 +14,10 @@ const user = sequelize.define('user', {
         type: sequelize.Sequelize.TEXT,
         comment: '用户名'
     },
-
+    email: {
+        type: sequelize.Sequelize.TEXT,
+        comment: '用户邮箱'
+    },
     password: {
         type: sequelize.Sequelize.TEXT,
         comment: '用户密码'

@@ -69,7 +69,35 @@ const authorize = async function(ctx){
         throw error
     }
 }
+const register = async function (ctx){
+    try {
+        let params = {
+            name: ctx.request.body.username,
+            password: ctx.request.body.password,
+            email: ctx.request.body.email,
+        };
+        // console.info('register:',ctx.request.body);
+        let data = await loginService.register(params);
+        // console.info('xx',data)
+        let code = 200;
+        let msg = '注册成功!'
+        if(!data){
+            code = 203
+            msg = '用户已存在,请勿重复添加';
+        }
+        
+        ctx.response.status = 200;
+        ctx.body = {
+            code: code,
+            msg: msg,
+            data:null
+        };
+    } catch (error) {
+        throw error
+    }
+}
 module.exports = {
     authorize,
+    register,
     login
 }

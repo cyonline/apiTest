@@ -12,7 +12,7 @@ router.use(
         cookie: 'token',
         debug: true
     }).unless({
-        path: [/\/authorize/]
+        path: [/\/public/]
     })
 )
 
