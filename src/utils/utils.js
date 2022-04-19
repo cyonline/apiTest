@@ -25,7 +25,12 @@ function isFunction(arg){
 } 
 
 function isEmpty(arg){
-    return Object.keys(arg).length === 0;
+    if(arg){
+        return Object.keys(arg).length === 0;
+    }else{
+        return !arg
+    }
+    
 }
 
 module.exports = {
