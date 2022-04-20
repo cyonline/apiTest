@@ -10,14 +10,14 @@ const authorize = async function(ctx){
     try {
         console.info('query:',ctx.request.query)
         let params = {
-            name: ctx.request.query.username || '',
-            password: ctx.request.query.password || ''
+            name: ctx.request.body.username || '',
+            password: ctx.request.body.password || ''
         };
         console.info('userLogin:',params);
         let data = await loginService.authorize(params);
 
         // let data = utils.dataHandle(res);  
-        console.info('结果;',data);
+        console.info('登录结果;',data);
         let msg = '';
         let code = '200'
         if(!utils.isEmpty(data)){

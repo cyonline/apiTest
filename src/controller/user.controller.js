@@ -103,12 +103,33 @@ const getUser = async function (ctx, next) {
 
 }
 
-
+const getUserInfo = async function(ctx,next){
+    try {
+        let uid =  ctx.request.query.userId || '';
+        console.info(uid);
+        let data = await userService.getUserInfo(uid);
+        console.info('user', data)
+        ctx.response.status = 200;
+        ctx.body = {
+            code: '200',
+            msg: 'success',
+            data
+        };
+    } catch (error) {
+        ctx.response.status = 400;
+        ctx.body = {
+            code: '400',
+            msg: 'error',
+            data: error,
+        };
+    }
+}
 
 
 
 module.exports = {
     userLogin,
     register: register,
-    getUser: getUser
+    getUser: getUser,
+    getUserInfo,
 };

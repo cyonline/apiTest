@@ -53,8 +53,23 @@ const createUser = async function (user) {
     }
 }
 
+const getUserInfo = async function (uid){
+    try {
+        let res = await userModel.findOne({
+            where:{
+                id:uid
+            },
+            raw: true
+        })
+        return res;
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     query,
     userLogin,
-    createUser
+    createUser,
+    getUserInfo
 }
