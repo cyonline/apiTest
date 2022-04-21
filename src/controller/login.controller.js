@@ -39,7 +39,7 @@ const authorize = async function(ctx){
                 console.info('token:',token);
                 data = {
                     access_token: token,
-                    expiresTime: 10000,
+                    expiresTime: new Date().getTime()+1000*60,
                     username: data.name,
                     userid: data.id
                 }
