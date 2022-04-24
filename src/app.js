@@ -32,13 +32,17 @@ app.use(cors(CORS_CONF));
 
 // 全局使用日志中间件
 app.use(accessLogger);
-app.on('error',(err,ctx)=>{
+app.on('error',async (err,ctx,next)=>{
     logger.error(err);
-    // console.info('捕捉:',err)
+    console.info('捕捉报错:',err)
+    ctx.response.status = 500;
     ctx.body = {
         state: 500,
         msg: err,
     }
+    console.info(ctx);
+    // ctx.throw(401,'error msg')
+    // await next()
 })
 
 

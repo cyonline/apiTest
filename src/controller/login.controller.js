@@ -1,7 +1,8 @@
 const loginService = require('../services/login.service')
-const { sign } = require('jsonwebtoken')
 const utils = require('../utils/utils')
 const config = require('../config/config')
+const authorization = require('../middleware/authorize')
+
 const login = async function(ctx,next){
     ctx.body = 'this is login'
 }
@@ -34,9 +35,8 @@ const authorize = async function(ctx){
                     // jti：JWT ID
                     name: data.name
                 }
-                // sign() params: payload(token的具体内容,有标准字段,也可添加自定义的) secret(密钥),options(其他选项)
-                let token = sign(payload, config.JWT_SECRET, { expiresIn: '3h' })
-                console.info('token:',token);
+                let token = authorization.newToken(payload)
+                // console.info('token:',token);
                 data = {
                     access_token: token,
                     expiresTime: new Date().getTime()+1000*60,
