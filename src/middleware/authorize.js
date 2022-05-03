@@ -6,7 +6,7 @@ const PUBLIC_KEY = fs.readFileSync(path.resolve(__dirname, '../static/key/public
 
 const newToken = (payload) => {
     // sign() params: payload(token的具体内容,有标准字段,也可添加自定义的) secret(密钥),options(其他选项) expiresIn "1d", "20h", 60
-    let token = jwt.sign(payload, PRIVATE_KEY, { expiresIn: 60, algorithm: 'RS256' })
+    let token = jwt.sign(payload, PRIVATE_KEY, { expiresIn: 60*60, algorithm: 'RS256' })
     console.info('newToken', token)
     return token;
 }
@@ -26,7 +26,7 @@ const verifyAuth = function () {
             }
             await next();
         } catch (error) {
-            throw Error(error);
+            throw error;
         }
 
     }

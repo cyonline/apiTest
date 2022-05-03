@@ -4,7 +4,7 @@ const cors = require('koa2-cors');
 // 解析post请求参数
 const bodyParser = require('koa-bodyparser');
 const {accessLogger,logger} = require('./middleware/log')
-
+const errorHandle = require('./middleware/error-handle')
 
 const app = new Koa();
 // const Router = require('koa-router');
@@ -12,37 +12,22 @@ const app = new Koa();
 
 // 注意顺序,必须在router之前被注册到app上
 app.use(bodyParser());
+app.use(errorHandle);
 
-// app.use(async (ctx, next) => {
-//     try {
-//         console.log(`${ctx.request.method} ${ctx.request.url}`); // 打印URL
-//         await next(); // 调用下一个middleware
-//     } catch (error) {
-//         // console.info(error);
-//         // logger.error(error);
-//         throw error;
-//     }
-    
-// }); 
+
 // 允许跨域访问
 const CORS_CONF = require('./config/cors-config')
 app.use(cors(CORS_CONF));
 
 
-
+                                                                                            
 // 全局使用日志中间件
 app.use(accessLogger);
-app.on('error',async (err,ctx,next)=>{
+app.on('error',async (err,ctx)=>{
     logger.error(err);
-    console.info('捕捉报错:',err)
-    ctx.response.status = 500;
-    ctx.body = {
-        state: 500,
-        msg: err,
-    }
-    console.info(ctx);
-    // ctx.throw(401,'error msg')
-    // await next()
+    // console.info('捕捉报错:',err)
+
+    
 })
 
 

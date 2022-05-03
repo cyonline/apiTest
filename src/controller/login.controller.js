@@ -62,7 +62,7 @@ const authorize = async function(ctx){
     } catch (error) {
         ctx.response.status = 400;
         ctx.body = {
-            code: '400',
+            code: 400,
             msg: 'error',
             data: error,
         };
