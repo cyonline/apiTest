@@ -26,7 +26,10 @@ const user = sequelize.define('user', {
         type: sequelize.Sequelize.TINYINT,   //  0 超级管理员 1普通用户
         comment: '用户类型'
     },
-    
+    intro: {
+        type: sequelize.Sequelize.TEXT,
+        comment: '个人简介'
+    }
     // //创建时间
     // createdAt: {
     //     type: sequelize.Sequelize.DATE,

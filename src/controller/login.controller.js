@@ -2,6 +2,10 @@ const loginService = require('../services/login.service')
 const utils = require('../utils/utils')
 const config = require('../config/config')
 const authorization = require('../middleware/authorize')
+const JSEncrypt = require('node-jsencrypt')
+const fs = require('fs');
+const path = require('path');
+const PRIVATE_KEY = fs.readFileSync(path.resolve(__dirname, '../static/key/private.pem')).toString();
 
 const login = async function(ctx,next){
     ctx.body = 'this is login'
@@ -9,10 +13,13 @@ const login = async function(ctx,next){
 
 const authorize = async function(ctx){
     try {
-        console.info('query:',ctx.request.query)
+        const decrypt = new JSEncrypt()
+        decrypt.setPrivateKey(PRIVATE_KEY)
+        let username = decrypt.decrypt(ctx.request.body.username)
+        let password = decrypt.decrypt(ctx.request.body.password)
         let params = {
-            name: ctx.request.body.username || '',
-            password: ctx.request.body.password || ''
+            name: username || '',
+            password: password || ''
         };
         console.info('userLogin:',params);
         let data = await loginService.authorize(params);
@@ -20,7 +27,7 @@ const authorize = async function(ctx){
         // let data = utils.dataHandle(res);  
         console.info('登录结果;',data);
         let msg = '';
-        let code = '200'
+        let code = 200;
         if(!utils.isEmpty(data)){
             if(data.password == params.password){
                 msg = '登录成功!'
