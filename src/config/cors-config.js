@@ -6,7 +6,7 @@ module.exports = {
             if(ctx.header['sec-fetch-mode'] === 'navigate'){ // 设置允许来自指定域名的请求(这里允许直接在浏览器地址栏请求)
                 return '*';  // 允许来自所有域名请求
             }
-            const whiteList = ['http://cyonline.club','http://localhost:3000','http://localhost:8001'];
+            const whiteList = ['http://cyonline.club','http://localhost:3000','http://localhost:8001','http://27.18.58.61'];
             let url = ctx.header.referer.substr(0,ctx.header.referer.length - 1);
             // console.info('ctx.header.referer:',ctx.header)
             if(whiteList.includes(url)){
